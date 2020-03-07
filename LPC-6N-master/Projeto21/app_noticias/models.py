@@ -27,9 +27,12 @@ class Comentario(models.Model):
     pessoa = models.ForeignKey(Pessoa,on_delete= models.CASCADE,verbose_name="Autor")
     data_hora = models.DateTimeField(auto_now=True, verbose_name = "Data e Hora")
     comentario = models.CharField("Comentario",max_length=500)
-    
+
 class Categoria(models.Model):
     titulo  = models.CharField("Titulo",max_length=564, blank=True, null=True)
+class Foto(models.Model):
+    titulo  = models.CharField("Titulo",max_length=564, blank=True, null=True)
+    url  = models.CharField("URL",max_length=564, blank=True, null=True)
 
 class Noticia(models.Model):
     class Meta:
