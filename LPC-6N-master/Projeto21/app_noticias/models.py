@@ -23,18 +23,27 @@ class Tag(models.Model):
     def __str__(self):
         return self.nome
 
+class Comentario(models.Model):
+    pessoa = models.ForeignKey(Pessoa,on_delete= models.CASCADE,verbose_name="Autor")
+    data_hora = models.DateTimeField(auto_now=True, verbose_name = "Data e Hora")
+    comentario = models.CharField("Comentario",max_length=500)
+    
+class Categoria(models.Model):
+    titulo  = models.CharField("Titulo",max_length=564, blank=True, null=True)
 
 class Noticia(models.Model):
     class Meta:
         verbose_name = 'Notícia'
         verbose_name_plural = 'Notícias'
     titulo = models.CharField('título',max_length=128, blank=True, null=True)
+    categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE, blank = True, null = True)
     conteudo = models.TextField()
     autor = models.ForeignKey(Pessoa,on_delete=models.CASCADE,verbose_name='Autor',max_length=128, blank=True, null=True)
     data_publicacao = models.DateField('Data', blank=True, null=True)
     tags = models.ManyToManyField(Tag)
+    comentarios = models.ForeignKey(Comentario,on_delete=models.CASCADE,verbose_name = "Comentarios", blank = True,null = True)
+    
     def __str__(self):
         return self.titulo
-
 
 
